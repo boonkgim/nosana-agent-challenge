@@ -8,7 +8,7 @@
     {
       "id": "agents",
       "args": {
-        "image": "k1llahkeezy/my-agent:0.0.2",
+        "image": "boonkgim/agent-challenge:0.0.0",
         "expose": 8080,
         "env": {
           "API_BASE_URL": "http://%%ops.ollama.host%%:11434"
@@ -16,9 +16,7 @@
       },
       "execution": {
         "group": "run",
-        "depends_on": [
-          "ollama"
-        ]
+        "depends_on": ["ollama"]
       },
       "type": "container/run"
     },
@@ -30,10 +28,7 @@
         "cmd": [
           "ollama serve & sleep 5 && ollama pull $MODEL && tail -f /dev/null"
         ],
-        "entrypoint": [
-          "/bin/sh",
-          "-c"
-        ],
+        "entrypoint": ["/bin/sh", "-c"],
         "resources": [
           {
             "url": "https://models.nosana.io/ollama/gpt-oss/20b",
