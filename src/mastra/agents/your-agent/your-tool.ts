@@ -2,21 +2,25 @@ import { createTool } from "@mastra/core";
 import { z } from "zod";
 
 // Simple async function that conforms to input and output schema
-const getInfo = async (ctx: string) =>
-  Promise.resolve({ bar: ctx.length, baz: "baz" });
+const getInfo = async (ctx: string) => {
+  return {
+    followers: 100,
+    bio: 'Hello'
+  }
+}
 
 // Define your tool using the `createtool`
 export const yourTool = createTool({
-  id: "tool-name",
+  id: "instagram-scraper",
   description: "Use the `createTool function to create your tool",
   inputSchema: z.object({
-    foo: z.string().describe("Foo name"),
+    username: z.string().describe("Instagram Username"),
   }),
   outputSchema: z.object({
-    bar: z.number(),
-    baz: z.string(),
+    followers: z.number(),
+    bio: z.string(),
   }),
-  execute: async ({ context }: { context: { foo: string } }) => {
-    return await getInfo(context.foo);
+  execute: async ({ context }: { context: { username: string } }) => {
+    return await getInfo(context.username);
   },
 });
